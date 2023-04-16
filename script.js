@@ -13,21 +13,22 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 function generatePassword() {
-  Password = "";
-// Need a variable for our mega-array of characters
-// TODO
+  var Password = "";
+
+  var lowerChar = "abcdefghijklmnopqrstuvwxyz";
+  var upperChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var numericChar = '0123456789';
+  var specialChar = '!@#$%^&*()_+~`|}{[]\:;?><,./-=';
 
   const minLength = 8;
   const maxLength = 123;
   
   let passwordLength = prompt('Enter required length of password');
   if (passwordLength >= minLength && passwordLength <= maxLength) {
-    // code to execute if the password length is within the valid range
   } else {
     do {
       passwordLength = prompt('Password needs to be between ' + minLength + ' and ' + maxLength);
     } while (passwordLength < minLength || passwordLength > maxLength);
-    // code to execute after the user enters a valid password length
   }
 
   const options = ["lowercase", "uppercase", "numeric", "special"];
@@ -44,13 +45,27 @@ function generatePassword() {
     }
   } while (!optionsAnswers.includes(true));
 
+  // const ranNum = Math.floor(Math.random() * array.length);
+  // console.log(ranNum);
 
-// Need to check whether the user selected at least one character type
-  // If not, prompt them again OR alert that the input wasn't valid and start over
+  var charOptions = "";
+  const charList = [lowerChar, upperChar, numericChar, specialChar];
+  console.log(charList)
+  console.log(optionsAnswers)
+
+  for (let i = 0; i < optionsAnswers.length; i++) {
+    if (optionsAnswers[i] == true){
+      console.log(optionsAnswers[i])
+      charOptions = charOptions.concat(charList[i]);
+    }
+  }
+
+  console.log(charOptions)
 // Need to make sure that at least one character is chosen from each character type
   // When the user selects a character type, generate a random character from that character set and concatenate it to the unfinished password
     // Generate a random character: Math.floor(Math.random() * array.length) gives me the random index, NOT the random character!
     // Can use .charAt()
+
     // OR array[Math.floor(Math.random() * array.length)]
     // Once we have the actual character, concatenate it to the variable that's storing our unfinished password
   // Push that character set to the mega-array
