@@ -32,18 +32,16 @@ function generatePassword() {
     } while (passwordLength < minLength || passwordLength > maxLength);
     // code to execute after the user enters a valid password length
   }
-  
 
-  // const passwordLength = prompt('Enter required length of password');
-  //   if (passwordLength >= minLength && passwordLength <= maxLength) {
-  //   } else if (passwordLength < minLength) {
-  //     passwordLength = prompt('Too Small');
-  //   } else {
-  //     passwordLength = prompt('Too big')
-  //   }
+  const options = ["lowercase", "uppercase", "numeric", "special characters"];
+  const optionsAnswers = []
 
+  for (let i = 0; i < options.length; i++) { 
+    optionsAnswers[i]=confirm("Confirm that you would like to include " + options[i]);
+  }
 
-
+  console.log(options);
+  console.log(optionsAnswers);
 
 // Confirm whether to use uppercase letters, lowercase letters, numbers, and/or special characters
   // ^ each of those needs to be stored in a variable
