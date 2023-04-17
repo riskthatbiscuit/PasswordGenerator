@@ -23,12 +23,14 @@ function generatePassword() {
   const minLength = 8;
   const maxLength = 123;
   
-  let passwordLength = prompt('Enter required length of password');
+  let promptResponse = prompt('Enter required length of password');
+  var passwordLength = parseInt(promptResponse);
+  
   if (passwordLength >= minLength && passwordLength <= maxLength) {
   } else {
     do {
       passwordLength = prompt('Password needs to be between ' + minLength + ' and ' + maxLength);
-    } while (passwordLength < minLength || passwordLength > maxLength);
+    } while (isNaN(passwordLength) || passwordLength < minLength || passwordLength > maxLength);
   }
 
   const options = ["lowercase", "uppercase", "numeric", "special"];
@@ -45,9 +47,6 @@ function generatePassword() {
     }
   } while (!optionsAnswers.includes(true));
 
-  // const ranNum = Math.floor(Math.random() * array.length);
-  // console.log(ranNum);
-
   var charOptions = "";
   const charList = [lowerChar, upperChar, numericChar, specialChar];
   console.log(charList)
@@ -55,10 +54,21 @@ function generatePassword() {
 
   for (let i = 0; i < optionsAnswers.length; i++) {
     if (optionsAnswers[i] == true){
-      console.log(optionsAnswers[i])
       charOptions = charOptions.concat(charList[i]);
+      const ranNum = Math.floor(Math.random()*(charList[i]).length);
+      const newChar = charList[i].slice(ranNum,ranNum+1);
+      Password = Password.concat(newChar);
     }
   }
+
+let numRemaining = passwordLength - Password.length;
+
+for (let i = 0; i < numRemaining; i++) {
+  const ranNum = Math.floor(Math.random()*charOptions.length);
+  const newChar = charOptions.slice(ranNum,ranNum+1);
+  Password = Password.concat(newChar);
+}
+
 
   console.log(charOptions)
 // Need to make sure that at least one character is chosen from each character type
@@ -80,6 +90,6 @@ function generatePassword() {
 
 
 // return unfinishedPassword
-  Password = passwordLength;
+  console.log(Password);
   return Password;
 }
