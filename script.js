@@ -36,17 +36,16 @@ function generatePassword() {
   }
   
   const optionsAnswers = []
-  
-  var loopcount = 0;
+  let selectedOptions = 0;
   do {
     for (let i = 0; i < options.length; i++) { 
-      if (loopcount >= 4 && loopcount % 4 == 0) {
-        alert("At least one option must be selected.");
-      }
       optionsAnswers[i]=confirm((i+1) + ". Confirm that you would like to include " + options[i] +  " characters");
+      if (optionsAnswers[i]) {
+        selectedOptions++;
+      }
       loopcount++;
     }
-  } while (!optionsAnswers.includes(true));
+  } while (selectedOptions === 0);
 
   var charOptions = "";
 
