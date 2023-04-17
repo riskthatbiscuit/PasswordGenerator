@@ -39,22 +39,23 @@ function generatePassword() {
   let selectedOptions = 0;
   do {
     for (let i = 0; i < options.length; i++) { 
-      optionsAnswers[i]=confirm((i+1) + ". Confirm that you would like to include " + options[i] +  " characters");
+      optionsAnswers[i]=confirm((i+1) + "/" + options.length + ". Confirm that you would like to include " + options[i] +  " characters");
       if (optionsAnswers[i]) {
         selectedOptions++;
       }
-      loopcount++;
+    }
+    if (selectedOptions === 0) {
+    alert("At least one option must be selected!");
     }
   } while (selectedOptions === 0);
 
-  var charOptions = "";
-
+  let charOptions = "";
   for (let i = 0; i < optionsAnswers.length; i++) {
     if (optionsAnswers[i] == true){
-      charOptions = charOptions.concat(charList[i]);
+      charOptions += charList[i];
       const ranNum = Math.floor(Math.random()*(charList[i]).length);
       const newChar = charList[i].slice(ranNum,ranNum+1);
-      password = password.concat(newChar);
+      password += newChar;
     }
   }
 
@@ -63,7 +64,7 @@ function generatePassword() {
   for (let i = 0; i < numRemaining; i++) {
     const ranNum = Math.floor(Math.random()*charOptions.length);
     const newChar = charOptions.slice(ranNum,ranNum+1);
-    password = password.concat(newChar);
+    password += newChar;
   }
 
   for (let i = 0; i < 3; i++){
